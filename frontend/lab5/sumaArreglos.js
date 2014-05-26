@@ -22,38 +22,33 @@ Sumatoria.prototype = {
 		return temp;
 	},
 	getAbc : function(){
-		var abc = [ "a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","v","w","x","z"];
+		var abc = [ "a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","v","w","x","y","z"],
+		    voca = ["a","e","i","o","u"],
+		    temp = [],
+		    j = 0,
+		    bandera = false;
 
-		var voca = ["a","e","i","o","u"];
+		    
+		while( j  < abc.length ){
 
-		var temp = [];
-
-var j = 0;
-		while( j  < voca.length ){
-
-			j++;
-
-			for(var i = 0; abc.length; i ++){
-				if(voca[j] === abc[i]){
-					console.log( abc[i]);
+			for(var i = 0; i <  voca.length; i ++){
+				if(voca[i] == abc[j]){
+					bandera = true; 
 				}
 			}
 
+			if(bandera == false){
+				temp.push(abc[j]); 	
+
+			}else {
+				bandera= false;
+			}
+
+			i = 0;
+			j++;
 		}
 
-
-		// for ( var i = 0 ; i < voca.length; i++  ){
-		// 	for ( var j = 0; j < abc.length;j++){
-		// 	//	while( j < voca.length ){					
-		// 			if (voca[j] === abc[i])
-		// 			{
-		// 			}else {
-		// 				temp.push(abc[i]);						
-		// 			}
-		// 	}
-		// 	//console.log(temp)
-		// }
-		console.log(temp);
+	console.log(temp);
 	}
 
 }
