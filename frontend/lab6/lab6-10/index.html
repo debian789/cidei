@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" href="css/style.css">
+	<script type="text/javascript" src="../assets/js/jquery-1.11.1.min.js"></script>
+	<script type="text/javascript" src="js/lab6-10.js"></script>
+</head>
+<body>
+
+
+
+	<form action=""  >
+		<fieldset>
+
+			<div>
+				<span class="label"> Nombre y apellido </span>
+				<input type="text" class="name" name="name" placeholder="Nombre y Apellido">
+				<span class="error"></span>
+
+			</div>
+
+			<div>
+				<span class="label"> Email </span>
+				<input type="text" class="email" name="email" placeholder="Email">
+				<span class="error"></span>
+
+			</div>
+
+			<div>
+				<span class="label">Password</span>
+				<input type="password" name="password" class="password" ><br/>
+				<span class="error"></span>
+
+			</div>
+
+			<div>
+				<span class="label">Confirmar Password</span>
+				<input type="password" name="confpass" class="confpass" ><br/>
+				<span class="error"></span>
+
+			</div>
+
+			<div>
+				<span class="label">Seleccionar Alimento</span>
+				<br/>
+				<input type="checkbox" id="alimento1" name="pizza" value="3000" > <label for="alimento1">Pizza $3000</label>
+				<input type="checkbox" id="alimento2" name="hotdog" value="6000" > <label for="alimento2">Hotdog $6000</label>
+				<input type="checkbox" id="alimento3" name="cocacola" value="3300" > <label for="alimento3">Cocacola $3300</label>
+				<input type="checkbox" id="alimento4" name="papafritas" value="1100" > <label for="alimento4">Papa Fritas $1100</label>
+				<span class="error"></span>
+				<br/>
+				<span class="resultado"></span>
+
+			</div>
+
+			<div>
+
+				<span class="label"> Tipo Tarjeta</span>
+				<input type="radio" id="targeta1" name="targeta"> <label for="targeta1">Master Cart</label>
+				<input type="radio" id="targeta2" name="targeta"> <label for="targeta2">Bancolombia</label>
+				<input type="radio" id="targeta3" name="targeta"> <label for="targeta3">Bogota</label>
+				<span class="error"></span>
+				<br/>
+				<span class="tipoTarjeta"></span>
+			</div>
+
+			<div>
+				<select name="city" id="city" class="select">
+					<option value="Bogota">Bogota</option>
+					<option value="Cali">Cali</option>
+					<option value="Medellin">Medellin</option>
+				</select>
+				<span class="error"></span>
+
+			</div>
+
+
+
+			<button class="button">
+				Enviar 
+			</button>
+
+		</fieldset>
+	</form>
+	
+</body>
+</html>
