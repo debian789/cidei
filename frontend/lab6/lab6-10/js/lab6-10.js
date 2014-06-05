@@ -188,7 +188,6 @@ localStorage.setItem('nombre',nombre);
 localStorage.setItem('email',email);
 localStorage.setItem('password',password);
 localStorage.setItem('cantidad',cantidad);
-
 localStorage.setItem('tipoPago',tipoPago);
 localStorage.setItem('city',city);
 

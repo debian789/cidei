@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" href="css/style2.css">
+	<script type="text/javascript" src="../assets/js/jquery-1.11.1.min.js"></script>
+	<script type="text/javascript" src="js/lab6-10-2.js"></script>
+</head>
+<body>
+
+	<form action="">
+		<fieldset>
+			<legend>formulario Valicacion</legend>
+			<fieldset>
+				<div id="userinfo">
+					<span class="label">Documento Identidad</span>
+					<input type="text" id="nid">
+					<span class="nid-error"></span>
+
+					<span class="label">Nombres y apellidos</span>
+					<input type="text" id="username">
+					<span class="nid-error"></span>
+
+				</div>
+			</fieldset>
+			<fieldset>
+				<div id="user">
+					<span class="label">password</span>
+					<input type="text" class="password" name="password">
+					<span class="password-error"></span>
+
+					<span class="label">confirmar password</span>
+					<input type="text" class="conf-password" name="conf-password">
+					<span class="conf-error"></span>
+
+
+
+
+
+				</div>
+				<div>
+					<span class="label">email</span>
+					<input type="text" class="emailadd" name="emailid">
+					<span class="email-error"></span>
+
+
+				</div>
+			</fieldset>
+			<fieldset>
+				<div id="checkboxes">
+					<span class="label">seleccionar alimentos</span>
+					<input type="checkbox" id="pizza" name="pizza" value="5000" class="chkb"> pizaa $5000<br/>
+					<input type="checkbox" id="hotdog" name="hotdog" value="3000" class="chkb"> hotdog 3000<br/>
+					<input type="checkbox" id="coke" name="coke" value="2000" class="chkb"> coke 2000<br/>
+					<input type="checkbox" id="fries" name="fries" value="3000" class="chkb"> fries 3000<br/>
+
+
+					<span class="food-error"></span><br/>
+					<span class="food-total"></span>
+
+
+
+				</div>
+			</fieldset>
+			<fieldset>
+				<div id="radios">
+					<span class="label">modo de pago </span>
+					<input type="radio"  name="paymode" value="Master Card" class="radiobth"> Master Card <br/>
+					<input type="radio"  name="paymode" value="Visa Card" class="radiobth">  <br/>
+				</div>
+			</fieldset>
+
+
+			<fieldset>
+				<div>
+					<span class="label">Ciudad  </span>
+					<select  id="city" class="infobox">
+						<option value="0">Seleccione una ciudad</option>
+						<option value="Barranquilla">Barranquilla</option>
+						<option value="Bogota">Bogota</option>
+						<option value="Cali">Cali</option>
+						<option value="Cartagena">Cartagena</option>
+						<option value="Medellin">Medellin</option>
+					</select>
+
+				</div>
+			</fieldset>
+
+			<div id="buttons">
+				<button class="button" href="#">Enviar</button>
+			</div>
+
+		</fieldset>
+	</form>
+
+	<div id="openModal" class="modalDialog">
+		<div>
+			<a href="#close" title="Close" class="close">X</a>
+		</div>
+	</div>
+
+</body>
+</html>
+
