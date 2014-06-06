@@ -1,0 +1,30 @@
+@import "_variables";
+
+body{
+	background: $secondary_color;
+	font-color:$primary_color;
+	width: $page_width;
+
+	h1 {
+		font-color:red;
+	}
+
+
+	h2{
+		font-family: 'Helvetica';
+		color:red;
+	}
+
+	.rojo{
+		background: $verde_violeta;
+		color:$rojo_sangre;
+	}
+	
+	.verde{
+		background: $rojo_sangre;
+		color: $verde_violeta
+	}
+
+
+
+}

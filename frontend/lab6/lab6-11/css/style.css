@@ -55,12 +55,12 @@ input {
 	background-color: rgba(255,0,0,0.1);
 }
 
-.sucess{
+.success{
 	border: 1px solid green;
 	background-color:  rgba(0,255,0,0.1);
 }
 
-.nid-error,.user-error,.password-error,.conf-password-error,.email-errer,.food-errr,.pay-error,.city-error{
+.nid-error, .user-error, .password-error, .conf-password-error,.email-error,.food-error,.pay-error,.city-erro{
 
 	color: red;
 	padding-left: 10px;
@@ -73,6 +73,9 @@ input {
 	margin-top: 10px;
 }
 
+#info{
+	display: none;
+}
 .modalDialog{
 	position: fixed;
 	font-family: "Helvetica",Arial;
@@ -81,7 +84,7 @@ input {
 	bottom: 0;
 	left: 0;
 
-	background: rgba(0,0,0,0);
+	background: rgba(0,0,0,0.8);
 
 	z-index: 99999;
 

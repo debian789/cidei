@@ -1,4 +1,8 @@
 $(document).ready(function(){
+
+$('#info').hide();
+
+
 	function Validate(){};
 
 	Validate.prototype = {
@@ -11,7 +15,6 @@ $(document).ready(function(){
 			return pattern.test(uid);
 
 		}
-
 	}
 
 	$('#nid').focus(function(){
@@ -63,98 +66,79 @@ $(document).ready(function(){
 	$('.city-error').hide();
 
 
-// function(classEstilo){
-// 	$(classEstilo).addClass(function('error'){
-// 		$(classEstilo).hide();
-// 	});
-// }
+
+	$('#buttons #info').remove();
+
+	$('.button').bind('click',function(event){
+		var validate = new Validate();
+		var data = $('#nid').val();
+
+		if(validate.userid(data)){
+			$('#nid').next().hide();
+			$('.nid-error').next().hide();
+			localStorage.setItem('nid',data);
+			$('.nid-error').text('Id correcto ');
+
+		}else {
+			$('input#nid').addClass('error');
+			$('.nid-error').next().show();
+			$('.nid-error').text('Indique su documento de Identidad');
+		}
 
 
+		var data = $('#username').val();
+		var len = data.length;
 
+		if(len < 1 && data === ""){
+			$('#username').next().show();
+			$('.user-error').next().show();
+			$('.user-error').text('Indique su(s) Nombre(s) y Apellido(s)');
 
-$('#buttons #info').remove();
+		}else{
+			$('#username').next().show();
+			$('.user-error').hide();
+			localStorage.setItem('username',data);
+			$('.user-error').text('usuario correcto ');
+			
 
-$('.button').bind('click',function(event){
-	var validate = new Validate();
+		}
 
-	var data = $('#nid').val();
+		var data = $('.password').val();
+		var len = data.length;
 
-	if(validate.userid(data)){
-		$('#nid').next().hide();
-		$('.nid-error').next().hide();
-		localStorage.setItem('nid',data);
+		if(len < 1 && data == ""){
+			$('.password').next().show();
+			$('.password-error').next().show();
+			$('.password-error').text('Ingrese una contrasena ');
 
+		}else{
+			$('.password').next().hide();
+			$('.password-error').next().hide();
+			localStorage.setItem('password',data);
+			$('.password-error').text('passwor correcto ');
 
+		}
 
+		var confdata = $('.conf-password').val();
+		var len = confdata.length;
 
-	}else {
-		$('input#nid').addClass('error');
-		$('.nid-error').next().show();
-		$('.nid-error').text('Indique su documento de Identidad');
-
-	}
-
-
-	var data = $('#username').validate();
-
-	var len = data.length;
-
-	if(len < 1 && data === ""){
-		$('#username').next().show();
-		$('.user-error').next().show();
-		$('.user-error').text('Indique su(s) Nombre(s) y Apellido(s)');
-
-	}else{
-		$('#username').next().hide();
-		$('.user-error').next().hide();
-		localStorage.setItem('username',data);
-
-
-	}
-
-
-
-
-	var data = $('.password').val();
-
-	var len = data.length;
-
-	if(len < 1 && data === ""){
-		$('.password').next().show();
-		$('.password-error').next().show();
-		$('.password-error').text('Ingrese una contrasena ');
-
-	}else{
-		$('.password').next().hide();
-		$('.password-error').next().hide();
-		localStorage.setItem('password',data);
-
-
-	}
-
-
-
-	var data = $('.conf-password').val();
-
-	var len = data.length;
-
-	if(len < 1 && data === ""){
-		$('.conf-password').next().show();
-		$('.conf-password-error').next().show();
-		$('.conf-password-error').text('Confirme lacontrasena ');
-
-	}else{
-		$('.conf-password').next().hide();
-		$('.conf-password-error').next().hide();
-		if( $('.password').val() !== $('.conf-password').val() ){
+		if(len < 1 && len !== ""){
 			$('.conf-password').next().show();
 			$('.conf-password-error').next().show();
-			$('.conf-password-error').text('la contrasena No es Igual  ');
+			$('.conf-password-error').text('Confirme lacontrasena ');
 
 		}else{
 			$('.conf-password').next().hide();
-			$('.conf-password-error').hide();
-		}
+			$('.conf-password-error').next().hide();
+			if( $('.password').val() !== $('.conf-password').val() ){
+				$('.conf-password').next().show();
+				$('.conf-password-error').next().show();
+				$('.conf-password-error').text('la contrasena No es Igual  ');
+
+			}else{
+				$('.conf-password').next().hide();
+				$('.conf-password-error').next().hide();
+			}
 		//localStorage.setItem('conf-password',data);
 
 
@@ -164,43 +148,41 @@ $('.button').bind('click',function(event){
 
 	var data = $('.emailadd').val();
 
-	var len = data.length;
-
+	
 	if(validate.email(data)){
-		$('.emailadd').next().hide();
-		$('.emailadd-error').next().hide();
+		$('.emailadd').next().show();
+		$('.emailadd-error').hide();
 		localStorage.setItem('email',data);
+		$('.email-error').text(' Email Correcto ')
+
 
 	}else{
 		$('.emailadd').next().hide();
-		$('.emailadd-error').next().show();
-		$('.emailadd-error').text('El email es incorrecto !');
-
-
-
-	}
+		$('.email-error').show();
+		$('.email-error').text('El email es incorrecto !')
+;	}
 
 	var count = 0, meals = {};
 
 	$('#checkboxes').find(':checked').each(function(){
 		if($(this).is(':checked')){
 			count += parseInt($(this).val());
-		/*
-		var a ={};
-		a.food = "pizza";
-		a['food'] ='pizza';
-		*/
-		meals[$(this).attr('name')] = parseInt($(this).val());
+			/*
+			var a ={};
+			a.food = "pizza";
+			a['food'] ='pizza';
+			*/
+			meals[$(this).attr('name')] = parseInt($(this).val());
 	}
-});
-
-
+	});
 
 
 	if(count === 0 ){
 		$('.food-error').css({'margin':50}).show();
 		$('.food-error').text('Debe seleccionar un alimento ');
 	}else{
+		$('.food-error').text('selecconar ');
+
 		$('.food-error').hide();
 		$('.food-total').show();
 		$('.food-total').text('El total de la compra: $'+count+'M/Cte');
@@ -227,7 +209,7 @@ $('.button').bind('click',function(event){
 		$('.pay-error').hide();
 	}
 
-	count = $('Select option:selected').val();
+	count = $('select option:selected').val();
 
 	if( count == "0"){
 		$('.city-error').show();
@@ -239,13 +221,15 @@ $('.button').bind('click',function(event){
 		$('.city-error').hide();
 		localStorage.setItem('city',count);
 
-		$('#buttons').append(
-			'<a id="info" href="#openModal">Ver detalles del pedido </a>'
-			);
+		// $('#buttons').append(
+		// 	'<a id="info" href="#openModal">Ver detalles del pedido </a>'
+		// 	);
+
+$('#info').css({'display':"initial"})
 
 
-		$('.input').removeClass('error');
-		$('.input').addClass('sucess');
+		$('.inputs').removeClass('error');
+		$('.inputs').addClass('success');
 
 	}
 
@@ -260,8 +244,8 @@ $('.button').bind('click',function(event){
 
 
 $(document).on('click','#info',function(){
-
-	$('#oppenModal > div ').append(
+$('#openModal ').html('<div> <a href="#close" title="Close" class="close">X</a></div>');
+	$('#openModal > div ').append(
 		'<h2>detalles de pedido </h2>'+
 		"<ul>"+
 		"<li>Su documento de identiedad es " + localStorage.getItem('nid') + '</li>'+
@@ -270,7 +254,7 @@ $(document).on('click','#info',function(){
 		"<li id='listMeals'>Los alimentos que solicita son:" + '<ul></ul></li>'+
 		'<li>El modo de pago es :' + localStorage.getItem('paymode') + '</li>'+
 		'<li>la ciudad donde vive es:' + localStorage.getItem('city') + '</li>'+
-		'</ul>'
+		'</ul><input  />'
 
 		);
 

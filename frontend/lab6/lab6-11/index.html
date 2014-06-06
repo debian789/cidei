@@ -3,9 +3,9 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Document</title>
-	<link rel="stylesheet" href="css/style2.css">
+	<link rel="stylesheet" href="css/style.css">
 	<script type="text/javascript" src="../assets/js/jquery-1.11.1.min.js"></script>
-	<script type="text/javascript" src="js/lab6-10-2.js"></script>
+	<script type="text/javascript" src="js/lab6-11.js"></script>
 </head>
 <body>
 
@@ -20,18 +20,18 @@
 
 					<span class="label">Nombres y apellidos</span>
 					<input type="text" id="username">
-					<span class="nid-error"></span>
+					<span class="user-error"></span>
 
 				</div>
 			</fieldset>
 			<fieldset>
 				<div id="user">
 					<span class="label">password</span>
-					<input type="text" class="password" name="password">
+					<input type="password" class="password" name="password">
 					<span class="password-error"></span>
 
 					<span class="label">confirmar password</span>
-					<input type="text" class="conf-password" name="conf-password">
+					<input type="password" class="conf-password" name="conf-password">
 					<span class="conf-error"></span>
 
 
@@ -90,14 +90,14 @@
 			<div id="buttons">
 				<button class="button" href="#">Enviar</button>
 			</div>
+			<a id="info" href="#openModal">Ver detalles del pedido </a>
+
 
 		</fieldset>
 	</form>
 
 	<div id="openModal" class="modalDialog">
-		<div>
-			<a href="#close" title="Close" class="close">X</a>
-		</div>
+
 	</div>
 
 </body>
