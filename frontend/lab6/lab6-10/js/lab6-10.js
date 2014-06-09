@@ -1,12 +1,10 @@
 $(document).ready(function(){
 
-	var nombre,email,password,alimento=[],precioTotal,tipoPago,city,cantidad=0;
-	
+	var nombre,email,password,alimento=[],precioTotal,tipoPago,city,cantidad=0;	
 	$('.error').hide();
 	
 	$('.name').blur(function(){
 		var data = $('.name').val();
-
 		var len = data.length;
 
 		if(len < 1){
@@ -35,6 +33,12 @@ $(document).ready(function(){
 			$('.email').next().show();
 			$('.password').attr('disabled',true);
 			$('.confpass').attr('disabled',true);
+			$('input[type=checkbox]').attr('disabled',true);
+			$('input[type=radio]').attr('disabled',true);
+			$('#city').attr('disabled',true);
+
+
+
 		}else{
 
 			if(valid_email(data)){
@@ -46,9 +50,11 @@ $(document).ready(function(){
 				$(this).css('background','green');
 				$('.password').removeAttr('disabled');
 				$('.confpass').removeAttr('disabled');
+				$('input[type=checkbox]').removeAttr('disabled');
+				$('input[type=radio]').removeAttr('disabled');
+				$('#city').removeAttr('disabled');
+
 				email = $(this).val();
-
-
 
 			}else{
 				//console.log('estoy aqui');
@@ -56,6 +62,9 @@ $(document).ready(function(){
 				self.parent().find('.error').text("Ingrese una direccion de correo valida");
 				$('.password').attr('disabled',true);
 				$('.confpass').attr('disabled',true);
+				$('input[type=checkbox]').attr('disabled',true);
+				$('input[type=radio]').attr('disabled',true);
+				$('#city').attr('disabled',true);
 				
 			//$('.email').next().hide();
 			//$('.password').removeAttr('disabled');
@@ -67,16 +76,16 @@ $(document).ready(function(){
 
 
 
-	$('.password').blur(function(){
-		var data = $('.password').val();
+$('.password').blur(function(){
+	var data = $('.password').val();
 
-		var len = data.length;
+	var len = data.length;
 
-		if(len < 1){
-			$('.password').next().show();
-			$('.confpass').attr('disabled',true);
+	if(len < 1){
+		$('.password').next().show();
+		$('.confpass').attr('disabled',true);
 
-		}else{
+	}else{
 			//$(this).css('background','green');
 
 			$('.password').next().hide();
@@ -87,75 +96,83 @@ $(document).ready(function(){
 
 	});
 
-	$('.confpass').blur(function(){
-		if($('.password').val() !== $('.confpass').val()){
-			$('.password').css('background','white');
-			$(this).css('background','white');
-
-			$(this).parent().find('.error').show().text("password incorrecto");
-		}else{
-			$(this).css('background','green');
-			$('.password').css('background','green');
-
-			$('.confpass').next().hide();
+$('.confpass').blur(function(){
+	if($('.password').val() !== $('.confpass').val()){
+		$('.password').css('background','white');
+		$(this).css('background','white');
+		$('input[type=checkbox]').attr('disabled',true);
+		$('input[type=radio]').attr('disabled',true);
+		$('#city').attr('disabled',true);
+		$(this).parent().find('.error').show().text("password incorrecto");
+	}else{
+		$(this).css('background','green');
+		$('.password').css('background','green');
+		$('input[type=checkbox]').removeAttr('disabled');
+		$('input[type=radio]').removeAttr('disabled');
+		$('#city').removeAttr('disabled');
+		$('.confpass').next().hide();
 			$(this).parent().find('.error').hide();//text("password incorrecto");
 			password = $(this).val();
 		}
 	});
 
-	$('.calcular').blur(function(){
+// $('.calcular').blur(function(){
 
-	});
+// });
 
-	$('input[type=checkbox]').click(function(){
+$('input[type=checkbox]').click(function(){
 
-		cantidad=0;
-		$('form').find('input[type=checkbox]:checked').each(function(){
-			if($(this).is('input[type=checkbox]:checked')){
+	cantidad=0;
+	$('form').find('input[type=checkbox]:checked').each(function(){
+		if($(this).is('input[type=checkbox]:checked')){
 
-				cantidad = cantidad + parseInt($(this).val());
-				$(this).parent().find('.resultado').text("Valor : "+ cantidad);
-
-
-			}
-		});
-
-
-		if($('input:checked').length == 0){
-			$(this).parent().find('.resultado').text("Valor : 0");
+			cantidad = cantidad + parseInt($(this).val());
+			$(this).parent().find('.resultado').text("Valor : "+ cantidad);
 
 
 		}
 	});
 
 
+	if($('input:checked').length == 0){
+		$(this).parent().find('.resultado').text("Valor : 0");
 
 
-	$('input[type=radio]').blur(function(){
-		tipoPago = $(this).attr('name');
+	}
+});
+
+
+
+
+
+$('input[type=radio]').click(function(){
+
+	tipoPago = $('input[type=radio]:checked').attr('id');
 		//debugger;
+		
+
 	});
 
-	$('select').blur(function(){
+$('select').blur(function(){
 
-		var count = $('select option:selected').val();
+	var count = $('select option:selected').val();
 
-		if(count === "0"){
-			$('p.result').hide();
-			$('.error').show();
-			$('.error').text("deber seleccionar uno ");
+	if(count === "0"){
+		$('p.result').hide();
+		$('.error').show();
+		$('.error').text("deber seleccionar uno ");
 
-		}else{
-			var selecOption="";
+	}else{
+		var selecOption="";
 
-			$('.select option:selected').each(function(){
-					selecOption += $(this).text()+",";
-					city= $(this).val();
+		$('.select option:selected').each(function(){
+			selecOption += $(this).text()+",";
+			city= $(this).val();
 			//	debugger;
-			});
+		});
 
-			$('.error').hide();
-			$('p.result').show();
+		$('.error').hide();
+		$('p.result').show();
 
 			//$('p.result').text("Ud. Selecciona el alimento : " + $('select option:selected').text());
 			$('p.result').text("Ud. Selecciona el alimento : " +selecOption);
@@ -177,9 +194,10 @@ $('.button').on('click',function(){
 
 
 
-// 	var nombre,email,password,alimento=[],precioTotal,tipoPago,city,cantidad=0;
-// if(!nombre ==""){
+//  	var nombre,email,password,alimento=[],precioTotal,tipoPago,city,cantidad=0;
+//  if(!nombre.length == 0 ){
 
+// }
 // }else{
 
 // }
@@ -193,7 +211,24 @@ localStorage.setItem('city',city);
 
 
 
-	event.preventDefault();
+alert("Nombre : "+ localStorage.getItem('nombre') +"\n"+
+	"Email : " + localStorage.getItem('email')+"\n"+
+	"Tipo Pago : " + localStorage.getItem('tipoPago')+"\n"+
+	"Ciudad : "+localStorage.getItem('city')+"\n"
+
+	);
+// var  ema = localStorage.getItem('email')
+// var  pas = localStorage.getItem('password')
+// var  can = localStorage.getItem('cantidad')
+// var  tip = localStorage.getItem('tipoPago')
+// var  cit = localStorage.getItem('city')
+
+// alert()
+
+
+
+
+event.preventDefault();
 	//return false;
 });
 
@@ -208,10 +243,10 @@ localStorage.setItem('city',city);
 
 
 
-	function valid_email(email){
-		var pattern = new RegExp(/^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]+$/);
-		return pattern.test(email);
+function valid_email(email){
+	var pattern = new RegExp(/^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]+$/);
+	return pattern.test(email);
 
-	}
+}
 
 });

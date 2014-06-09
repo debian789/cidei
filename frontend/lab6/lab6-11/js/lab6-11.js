@@ -1,6 +1,6 @@
 $(document).ready(function(){
 
-$('#info').hide();
+	$('#info').hide();
 
 
 	function Validate(){};
@@ -77,7 +77,7 @@ $('#info').hide();
 			$('#nid').next().hide();
 			$('.nid-error').next().hide();
 			localStorage.setItem('nid',data);
-			$('.nid-error').text('Id correcto ');
+			//$('.nid-error').text('Id correcto ');
 
 		}else {
 			$('input#nid').addClass('error');
@@ -98,7 +98,7 @@ $('#info').hide();
 			$('#username').next().show();
 			$('.user-error').hide();
 			localStorage.setItem('username',data);
-			$('.user-error').text('usuario correcto ');
+			//$('.user-error').text('usuario correcto ');
 			
 
 		}
@@ -115,7 +115,7 @@ $('#info').hide();
 			$('.password').next().hide();
 			$('.password-error').next().hide();
 			localStorage.setItem('password',data);
-			$('.password-error').text('passwor correcto ');
+			//$('.password-error').text('passwor correcto ');
 
 		}
 
@@ -150,17 +150,17 @@ $('#info').hide();
 
 	
 	if(validate.email(data)){
-		$('.emailadd').next().show();
+		$('.emailadd').next().hide();
 		$('.emailadd-error').hide();
 		localStorage.setItem('email',data);
 		$('.email-error').text(' Email Correcto ')
 
 
 	}else{
-		$('.emailadd').next().hide();
-		$('.email-error').show();
-		$('.email-error').text('El email es incorrecto !')
-;	}
+		$('.emailadd').next().show();
+		$('.email-error').next().show();
+		$('.email-error').text('El email es incorrecto !');
+	}
 
 	var count = 0, meals = {};
 
@@ -173,7 +173,7 @@ $('#info').hide();
 			a['food'] ='pizza';
 			*/
 			meals[$(this).attr('name')] = parseInt($(this).val());
-	}
+		}
 	});
 
 
@@ -181,7 +181,7 @@ $('#info').hide();
 		$('.food-error').css({'margin':50}).show();
 		$('.food-error').text('Debe seleccionar un alimento ');
 	}else{
-		$('.food-error').text('selecconar ');
+		//$('.food-error').text('selecconar ');
 
 		$('.food-error').hide();
 		$('.food-total').show();
@@ -201,8 +201,6 @@ $('#info').hide();
 
 
 	if(count === 0 ){
-
-
 		$('.pay-error').css({'margin-left':50}).show();
 		$('.pay-error').text('Debe seleccionar un mode de pago ')
 	}else{
@@ -214,37 +212,24 @@ $('#info').hide();
 	if( count == "0"){
 		$('.city-error').show();
 		$('.city-error').text('Debe seleccionar una Ciudad');
-
-
-
 	}else{
 		$('.city-error').hide();
 		localStorage.setItem('city',count);
-
 		// $('#buttons').append(
 		// 	'<a id="info" href="#openModal">Ver detalles del pedido </a>'
 		// 	);
-
-$('#info').css({'display':"initial"})
-
-
+		$('#info').css({'display':"initial"})
 		$('.inputs').removeClass('error');
 		$('.inputs').addClass('success');
 
 	}
 
-
-
 	event.preventDefault();
-
-
-
-
 });
 
 
 $(document).on('click','#info',function(){
-$('#openModal ').html('<div> <a href="#close" title="Close" class="close">X</a></div>');
+	$('#openModal ').html('<div> <a href="#close" title="Close" class="close">X</a></div>');
 	$('#openModal > div ').append(
 		'<h2>detalles de pedido </h2>'+
 		"<ul>"+
@@ -254,7 +239,7 @@ $('#openModal ').html('<div> <a href="#close" title="Close" class="close">X</a><
 		"<li id='listMeals'>Los alimentos que solicita son:" + '<ul></ul></li>'+
 		'<li>El modo de pago es :' + localStorage.getItem('paymode') + '</li>'+
 		'<li>la ciudad donde vive es:' + localStorage.getItem('city') + '</li>'+
-		'</ul><input  />'
+		'</ul>'
 
 		);
 
