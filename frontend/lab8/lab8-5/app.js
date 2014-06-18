@@ -5,14 +5,16 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
-var routes = require('./routes/index');
-var users = require('./routes/users');
+var cons = require('consolidate');
+
+//var routes = require('./routes/index');
+//var users = require('./routes/users');
 
 var app = express();
 
 // view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
+//app.set('views', path.join(__dirname, 'views'));
+//app.set('view engine', 'jade');
 
 app.use(favicon());
 app.use(logger('dev'));
@@ -22,20 +24,42 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 //app.use('/', routes);
+//app.use('/users', users);
+
+///////// utilizar consolidate, swig /////////////////
+console.log(cons.swig);
+app.engine('html', cons.swig);
+app.set('view engine','html');
+app.set('views',path.join(__dirname,'views'));
+////////////////////////
+
+
 app.get('/',function(req,res){
-    res.send("/GET Ok");
-});
+     res.render('index', { name: 'Hola Sofia !!!' });
+    //res.send('Hola Mundo !!!! ');
 
-app.get('/hello',function(req,res){
-    res.send('/GET Hello Word!');
-});
-
-app.post('/datos',function(req,res){
-    res.send("su Nombre : " + req.body.nombre);
 });
 
 
-app.use('/users', users);
+app.get('/register',function(req,res){
+     res.render('register');
+    //res.send('Hola Mundo !!!! ');
+
+});
+
+
+app.post('/register',function(req,res){
+    for(key in req.body ){
+        console.log('\n' + key + ' : ' + req.body[key]);
+    }
+
+    res.set(req.body);
+
+    res.send('Datos Correctos ');
+});
+
+
+
 
 /// catch 404 and forward to error handler
 app.use(function(req, res, next) {
