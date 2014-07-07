@@ -1,5 +1,5 @@
 """
-Django settings for cidei project.
+Django settings for lab2 project.
 
 For more information on this file, see
 https://docs.djangoproject.com/en/1.6/topics/settings/
@@ -17,7 +17,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 # See https://docs.djangoproject.com/en/1.6/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'ax_nlk46c043-n71zvz6f9)gn!4-lnk$$d-(%1o2=)!h=ecykb'
+SECRET_KEY = '*_9-2l5*5b)gwe*4%dz&a-kypy(gr0zth^()*y)bb&bk3_1(&a'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -36,7 +36,6 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'autofixture',
     'app',
 )
 
@@ -49,9 +48,9 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
-ROOT_URLCONF = 'cidei.urls'
+ROOT_URLCONF = 'lab2.urls'
 
-WSGI_APPLICATION = 'cidei.wsgi.application'
+WSGI_APPLICATION = 'lab2.wsgi.application'
 
 
 # Database
@@ -81,21 +80,4 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
 
-
 STATIC_URL = '/static/'
-
-
-
-# servir las plantillas 
-TEMPLATE_PATH = os.path.join(BASE_DIR,'templates')
-
-TEMPLATE_DIRS = (
-    TEMPLATE_PATH,
-    )
-
-STATICFILES_DIRS = (
-    os.path.join(BASE_DIR,'static'),
-)
-
-
-

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>{{ title }}</title>
+</head>
+<body>
+	<h1> {{ title }} </h1>
+
+{% if categorias %}
+<ul>
+	<li> nombre : {{ categorias.name }} </li>
+	<li> slug : {{ categorias.slug }} </li>
+
+
+</ul>
+{% endif %}
+
+{% if items %}
+<ul>
+	<li> nombre : {{ items.name }} </li>
+
+	<li> Categoria : {{ items.category.name  }} </li>
+	<li> Departamento  : {{ items.departament }} </li>
+	<li> nombre : {{ items.name }} </li>
+	<li> nombre : {{ items.name }} </li>
+	<li> Creado  : {{ items.posted_on|date }} </li>
+	<h2>Descripcion</h2>
+	<p>{{ items.description|linebreaksbr  }}</p>
+
+</ul>
+{% endif %}
+
+
+</body>
+<html>

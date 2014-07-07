@@ -16,13 +16,28 @@
 
 
 	{% if categorias %}
-		<ul>
-			{% for categoria  in categorias  %}
-			<li><a href="{% url 'detalles-categoria' categoria.slug %} " /> {{ categoria.name|capfirst }}</a> </li> 
+
+		<table width="800px"  border="1">
+		<tr>
+			<td>Categorias</td>
+			<td>Editar</td>
+		</tr>
+{% for categoria  in categorias  %}
+		<tr>
+			<td>{{ categoria.name|capfirst }}</td>
+			<td><a href="{% url 'actualizar-categoria' categoria.slug %}">Editar </a> </td>
+			<td><a href="{% url 'detalles-categoria' categoria.slug %}">Detalles </a> </td>
+		</tr>
 			{% endfor %}
-		</ul>
+
+	</table>
+
+
+
+
 	{% endif %}
 
+<a href="{% url 'index' %}">Index </a>
 
 
 </body>

@@ -9,3 +9,7 @@ class ItemForm(forms.Form):
 	departament = forms.CharField(max_length=255)
 	description = forms.CharField(widget=forms.Textarea)
 	update_item = forms.DateTimeField()
+
+class CategoryForm(forms.Form):
+	name = forms.CharField(max_length=255)
+	slug = forms.SlugField(max_length=255)

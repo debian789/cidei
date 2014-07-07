@@ -2,20 +2,36 @@
 <html>
 <head>
 	<title>{{ title }}</title>
+	<script src="{% static "js/jquery-1.11.1.min.js" %}"></script>
+	<script src="{% static "js/jquery.cookie.js" %}"></script>
+	<script src="{% static "js/lab6.js" %}"></script>
+</head>
+
 </head>
 <body>
 	<h1> {{ title }} </h1>
 
+
+
+
 {% if categorias %}
+<a href="{% url 'actualizar-categoria' categorias.slug  %}">Editar </a>
 <ul>
 	<li> nombre : {{ categorias.name }} </li>
 	<li> slug : {{ categorias.slug }} </li>
 
 
 </ul>
+
+
+<a href="{% url 'categoria' %}">Listado Category </a>
+
 {% endif %}
 
 {% if items %}
+
+<a href="{% url 'actualizar-item' items.id  %}">Editar </a>
+
 <ul>
 	<li> nombre : {{ items.name }} </li>
 
@@ -28,8 +44,15 @@
 	<p>{{ items.description|linebreaksbr  }}</p>
 
 </ul>
+
+<a href="{% url 'item' %}"> Listado Item </a>
 {% endif %}
 
 
+<a href="{% url 'index' %}"> Home </a>
+<br/>
+<a href="#" id="getAllItems" > Traer el resto de items a traves de AJAX con Django</a>
+
+<div id="resultAllItems"></div>
 </body>
 <html>

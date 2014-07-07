@@ -1,5 +1,5 @@
 """
-Django settings for cidei project.
+Django settings for lab3 project.
 
 For more information on this file, see
 https://docs.djangoproject.com/en/1.6/topics/settings/
@@ -17,7 +17,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 # See https://docs.djangoproject.com/en/1.6/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'ax_nlk46c043-n71zvz6f9)gn!4-lnk$$d-(%1o2=)!h=ecykb'
+SECRET_KEY = '@prfs777)y0$g_*$t@c+g0x@t-z7%r*#-_692a9@vrm-nqe8t^'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -37,7 +37,9 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'autofixture',
-    'app',
+    #'mockups',
+    'list',
+   # 'django-extensions',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -49,9 +51,9 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
-ROOT_URLCONF = 'cidei.urls'
+ROOT_URLCONF = 'lab3.urls'
 
-WSGI_APPLICATION = 'cidei.wsgi.application'
+WSGI_APPLICATION = 'lab3.wsgi.application'
 
 
 # Database
@@ -60,7 +62,7 @@ WSGI_APPLICATION = 'cidei.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'NAME': os.path.join(BASE_DIR, 'cidei.sqlite3'),
     }
 }
 
@@ -81,21 +83,4 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
 
-
 STATIC_URL = '/static/'
-
-
-
-# servir las plantillas 
-TEMPLATE_PATH = os.path.join(BASE_DIR,'templates')
-
-TEMPLATE_DIRS = (
-    TEMPLATE_PATH,
-    )
-
-STATICFILES_DIRS = (
-    os.path.join(BASE_DIR,'static'),
-)
-
-
-

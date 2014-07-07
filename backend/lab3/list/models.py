@@ -1,5 +1,6 @@
 from django.db import models
 
+
 L_TYPE= (
 	('t','Para verificar'),
 	('l','Para revisar'),
@@ -7,12 +8,12 @@ L_TYPE= (
 )
 
 
-class Category(models.Model):
+class  Category(models.Model):
 	name = models.CharField(max_length=255)
 	slug = models.SlugField(max_length=255,unique=True)
 
 	def __unicode__(self):
-		return self.name 
+		return " %s -  %s" % (self.name,self.slug)
 
 class Item(models.Model):
 	listing = models.CharField(max_length=1,choices=L_TYPE,default='t')
@@ -21,12 +22,7 @@ class Item(models.Model):
 	departament = models.CharField(max_length=255)
 	description = models.TextField()
 	posted_on =  models.DateTimeField(auto_now_add=True)
-	update_item = models.DateTimeField()
 
 	def __unicode__(self):
 		return  " %s - %s " % (self.name, self.category)
-
-class Pictures(models.Model):
-	item  = models.ForeignKey(Item)
-	url = models.CharField(max_length=255)
 # Create your models here.

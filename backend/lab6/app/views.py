@@ -1,7 +1,14 @@
 from django.shortcuts import render,render_to_response,get_object_or_404,HttpResponseRedirect
 from django.template import Context,RequestContext
 from app.models import Item,Category
-from app.forms import ItemForm
+from app.forms import ItemForm,CategoryForm
+
+
+#modulo serializador de QuerySets para Django
+from  django.http import HttpResponse
+from django.core.serializers import serialize 
+import json 
+
 
 def index(request):
 	#items = Item.objects.all()
@@ -76,9 +83,102 @@ def add_item(request):
 		form = ItemForm()
 
 	
-	context = Context({'title':"Adicionar Item",'form':form })
+	context = Context({'title':"Adicionar Item",'form':form,'info_button':'Crear ' })
 	return render_to_response('form.html',context, context_instance = RequestContext(request))
 
 
 
+
+def itemUpdate(request,item_id):
+	item = get_object_or_404(Item,id=item_id)
+	if request.method == "POST":
+		form = ItemForm(request.POST)
+
+		if form.is_valid():
+			item.listing = form.cleaned_data['listing'],
+			item.name = form.cleaned_data['name'],
+			item.category = form.cleaned_data.get('category'),
+			item.departament = form.cleaned_data['departament'],
+			item.description = form.cleaned_data['description'],
+			item. update_item = form.cleaned_data['update_item']
+			item.save()
+
+			return HttpResponseRedirect('/items/%s/' % item.id )
+	else:
+
+		item_data = {
+		'listing' :item.listing,
+		'name' :item.name,
+		'category' :item.category,
+		'departament' :item.departament,
+		'description' :item.description,
+		'update_item' :item.update_item
+		}
+
+		form = ItemForm(initial=item_data)
+	
+	context = Context({'title':"Adicionar Item",'form':form,'info_button':'Actualizar ' })
+	return render_to_response('form.html',context, context_instance = RequestContext(request))
+
+
+
+
+
+
+
+
+def add_category(request):
+	if request.method == "POST":
+		form = CategoryForm(request.POST)
+
+		if form.is_valid():
+			category = Category.objects.create(				
+				name = form.cleaned_data['name'],
+				slug = form.cleaned_data['slug'],
+				)
+
+			return HttpResponseRedirect('/categoria/%s/' % category.slug )
+	else:
+		form = CategoryForm()
+
+	
+	context = Context({'title':"Adicionar Category ",'form':form ,'info_button':'Crear'})
+	return render_to_response('add-category.html',context, context_instance = RequestContext(request))
+
+
+
+
+def categoriaUpdate(request,slug):
+	category = get_object_or_404(Category,slug=slug)
+	if request.method == "POST":
+		form = CategoryForm(request.POST)
+		if form.is_valid():
+			category.name = form.cleaned_data['name']
+			category.slug = form.cleaned_data['slug']
+
+			category.save()
+
+			return HttpResponseRedirect('/categoria/%s/' % category.slug)
+	else: 
+		category_data = {
+		'name':category.name,
+		'slug':category.slug
+		}
+		form = CategoryForm(initial=category_data)
+
+	context = Context({'title':'Editar la Categoria','form':form,'info_button':'Actualizar'})
+	return render_to_response('add-category.html',context,context_instance=RequestContext(request))
+
+def ajax_items(request):
+	if request.is_ajax():
+		items = Item.objects.all()
+		print item 
+		items = serialize('json',items)
+		print items 
+		items = json.dumps(items)
+		print items 
+
+		return HttpResponse(items,content_type='application/json')
+	else:
+		return HttpResponse({'error':"Hubo un error"}, content_type='application/json')
 
