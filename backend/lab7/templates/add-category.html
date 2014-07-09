@@ -1,0 +1,24 @@
+{% load static from staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>{{ title }}</title>
+</head>
+<body>
+	<form action="." method="POST">
+	{{ form.as_p }}
+	{% csrf_token %} 
+	<input type="submit" value="{{ info_button }} " >
+		
+	</form>
+
+	<form action=".">
+		{{ tipoCategoria.as_p }}
+	{% csrf_token %} 
+	<input type="submit" value="{{ info_button }} " >
+
+	</form>
+	
+</body>
+</html>
