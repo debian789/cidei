@@ -1,0 +1,21 @@
+{% extends "accounts/base.html" %}
+
+{# Agreando contenido a la herancia base.html en la cabecera  del documento HTML  #}
+
+{% block extrahead %}
+	<meta charset="utf-8" >
+{% endblock %}
+
+{# Agreando contenido a la herancia base.html en el cuerpo a body del documento HTML  #}
+
+{% block body %}
+	<h1>Registro de usuario </h1>
+
+	<form action="{% url 'register' %}" method="POST" id="user_form" enctype="multipart/form-data">
+		{% csrf_token %}
+		{{ user_form.as_p }}
+		{{ profile_form.as_p }}
+		<input type="submit" name="submit"  value="!Registrarme! ">
+	</form>
+
+{% endblock %}

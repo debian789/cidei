@@ -1,0 +1,45 @@
+{% load static from staticfiles %}
+<!DOCTYPE html>
+<html>
+<head>
+	<title>{{ title }}</title>
+</head>
+<body>
+	<h1> {{ title }} Lista de opciones </h1>
+
+	{% if  items %}
+		<ul>
+			{% for item in items  %}
+			<li><a href="{%  url 'detalles-item'   item.id %}" /> {{ item.name|capfirst }}</a> </li> 
+			{% endfor %}
+		</ul>
+	{% endif %}
+
+
+	{% if categorias %}
+
+		<table width="800px"  border="1">
+		<tr>
+			<td>Categorias</td>
+			<td>Editar</td>
+		</tr>
+{% for categoria  in categorias  %}
+		<tr>
+			<td>{{ categoria.name|capfirst }}</td>
+			<td><a href="{% url 'actualizar-categoria' categoria.slug %}">Editar </a> </td>
+			<td><a href="{% url 'detalles-categoria' categoria.slug %}">Detalles </a> </td>
+		</tr>
+			{% endfor %}
+
+	</table>
+
+
+
+
+	{% endif %}
+
+<a href="{% url 'index' %}">Index </a>
+
+
+</body>
+<html>
