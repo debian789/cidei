@@ -3,6 +3,7 @@ from django.template import Context,RequestContext
 from app.models import Item,Category
 from app.forms import ItemForm,CategoryForm,TipoCategoriaForm
 
+from django.contrib.auth.decorators import login_required 
 
 #modulo serializador de QuerySets para Django
 from  django.http import HttpResponse
@@ -13,30 +14,34 @@ import json
 def index(request):
 	#items = Item.objects.all()
 	context = Context({'title':'Index  '})
-	return render_to_response('index.html',context)
+	return render_to_response('app/index.html',context , context_instance = RequestContext(request))
+
 
 
 def about(request):
 	#items = Item.objects.all()
 	context = Context({'title':'Index','about':'titulo_about'})
-	return render_to_response('about.html',context)
+	return render_to_response('app/about.html',context)
 
 
 
 
+@login_required()
 def item(request):
 	items = Item.objects.all()
 	context = Context({'title':'Items ','items':items})
-	return render_to_response('categorias_items.html',context)
+	return render_to_response('app/categorias_items.html',context)
 
+@login_required()
 def categoria(request):
 	categorias = Category.objects.all()
 	context = Context({'title':'Categorias ','categorias':categorias})
-	return render_to_response('categorias_items.html',context)
+	return render_to_response('app/categorias_items.html',context)
 
 
 
 
+@login_required()
 def itemDetails(reques,item_id):
 	item = get_object_or_404(Item, id=item_id)
 
@@ -46,9 +51,10 @@ def itemDetails(reques,item_id):
 
 		})
 	#print context
-	return render_to_response('detail_item_categoria.html',context)
+	return render_to_response('app/detail_item_categoria.html',context)
 
 
+@login_required()
 def categoriaDetail(request,slug):
 
 	categorias = get_object_or_404(Category, slug=slug)
@@ -60,10 +66,11 @@ def categoriaDetail(request,slug):
 
 		})
 	#print context
-	return render_to_response('detail_item_categoria.html',context)
+	return render_to_response('app/detail_item_categoria.html',context)
 
 
 
+@login_required()
 def add_item(request):
 	if request.method == "POST":
 		form = ItemForm(request.POST)
@@ -78,17 +85,18 @@ def add_item(request):
 				update_item = form.cleaned_data['update_item']
 				)
 
-			return HttpResponseRedirect('/items/%s/' % item.id )
+			return HttpResponseRedirect('/app/items/%s/' % item.id )
 	else:
 		form = ItemForm()
 
 	
 	context = Context({'title':"Adicionar Item",'form':form,'info_button':'Crear ' })
-	return render_to_response('form.html',context, context_instance = RequestContext(request))
+	return render_to_response('app/form.html',context, context_instance = RequestContext(request))
 
 
 
 
+@login_required()
 def itemUpdate(request,item_id):
 	item = get_object_or_404(Item,id=item_id)
 	if request.method == "POST":
@@ -103,7 +111,7 @@ def itemUpdate(request,item_id):
 			item. update_item = form.cleaned_data['update_item']
 			item.save()
 
-			return HttpResponseRedirect('/items/%s/' % item.id )
+			return HttpResponseRedirect('/app/items/%s/' % item.id )
 	else:
 
 		item_data = {
@@ -118,7 +126,7 @@ def itemUpdate(request,item_id):
 		form = ItemForm(initial=item_data)
 	
 	context = Context({'title':"Adicionar Item",'form':form,'info_button':'Actualizar ' })
-	return render_to_response('form.html',context, context_instance = RequestContext(request))
+	return render_to_response('app/form.html',context, context_instance = RequestContext(request))
 
 
 
@@ -127,6 +135,7 @@ def itemUpdate(request,item_id):
 
 
 
+@login_required()
 def add_category(request):
 	if request.method == "POST":
 		form = CategoryForm(request.POST)
@@ -138,18 +147,19 @@ def add_category(request):
 				description = form.cleaned_data['description'],
 				)
 
-			return HttpResponseRedirect('/categoria/%s/' % category.slug )
+			return HttpResponseRedirect('/app/categoria/%s/' % category.slug )
 	else:
 		form = CategoryForm()
 		tipoCategoria = TipoCategoriaForm()
 
 	
 	context = Context({'title':"Adicionar Category ",'form':form ,'info_button':'Crear',"tipoCategoria":tipoCategoria})
-	return render_to_response('add-category.html',context, context_instance = RequestContext(request))
+	return render_to_response('app/add-category.html',context, context_instance = RequestContext(request))
 
 
 
 
+@login_required()
 def categoriaUpdate(request,slug):
 	category = get_object_or_404(Category,slug=slug)
 	if request.method == "POST":
@@ -160,7 +170,7 @@ def categoriaUpdate(request,slug):
 
 			category.save()
 
-			return HttpResponseRedirect('/categoria/%s/' % category.slug)
+			return HttpResponseRedirect('/app/categoria/%s/' % category.slug)
 	else: 
 		category_data = {
 		'name':category.name,
@@ -169,7 +179,7 @@ def categoriaUpdate(request,slug):
 		form = CategoryForm(initial=category_data)
 
 	context = Context({'title':'Editar la Categoria','form':form,'info_button':'Actualizar'})
-	return render_to_response('add-category.html',context,context_instance=RequestContext(request))
+	return render_to_response('app/add-category.html',context,context_instance=RequestContext(request))
 
 def ajax_items(request):
 	if request.is_ajax():

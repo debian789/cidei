@@ -1,8 +1,10 @@
-from django.shortcuts import render, render_to_response, get_object_or_404, HttpResponseRedirect 
+from django.shortcuts import render, render_to_response, get_object_or_404, HttpResponseRedirect,HttpResponse 
 from django.template import Context, RequestContext 
 from django.contrib.auth.models import User 
 from accounts.models import UserProfile
 from django.contrib.auth import authenticate,login 
+from forms import UserForm,UserProfileForm
+from django.contrib.auth import logout 
 
 def register(request):
 	if request.method == 'POST':
@@ -36,3 +38,26 @@ def register(request):
 	return render_to_response('accounts/register.html',context,context_instance= RequestContext(request))
 
 
+def user_logout(request):
+	logout(request)
+
+	return HttpResponseRedirect('/app/')
+
+def user_login(request):
+	if request.method == 'POST':
+		username = request.POST['username']
+		password = request.POST['password']
+
+		user = authenticate(username=username, password=password)
+
+		if user: 
+			if user.is_active:
+				login(request,user) 
+				return HttpResponseRedirect('/app/')
+			else: 
+				return HttpResponseRedirect('el usuario esta errado ')
+		else: 
+			print "los detalles de acceso son : {0},{1}".formt(username,password)
+			return HttpResponse("Datos invalidos ")
+	else: 
+		return render_to_response('accounts/login.html',{},context_instance=RequestContext(request))
